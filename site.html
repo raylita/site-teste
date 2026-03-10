@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>10 coisas que eu odeio em você</title>
+<audio id="musica" loop>
+  <source src="reinventar.mp3" type="audio/mpeg">
+</audio>
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Georgia, serif;
+color:white;
+text-align:center;
+overflow:hidden;
+
+background:linear-gradient(-45deg,#ff4d88,#ff6fa5,#ff8fb8,#ffb3cc);
+background-size:400% 400%;
+animation:fundo 12s ease infinite;
+}
+
+@keyframes fundo{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+
+/* tela inicial */
+
+.tela-inicial{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+
+gap:25px;
+
+background:linear-gradient(-45deg,#ff4d88,#ff6fa5,#ff8fb8,#ffb3cc);
+background-size:400% 400%;
+animation:fundo 12s ease infinite;
+
+z-index:10;
+}
+
+.botao-abrir{
+padding:15px 35px;
+font-size:20px;
+border:none;
+border-radius:40px;
+background:#ff2e6e;
+color:white;
+cursor:pointer;
+}
+
+/* titulo */
+
+.titulo-romantico{
+position:absolute;
+top:30px;
+left:50%;
+transform:translateX(-50%);
+
+padding:12px 30px;
+
+font-size:24px;
+
+background:rgba(255,255,255,0.2);
+
+border-radius:30px;
+}
+
+/* container */
+
+.container{
+background:rgba(255,255,255,0.15);
+padding:40px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+max-width:700px;
+}
+
+/* botões */
+
+button{
+margin-top:30px;
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#ff2e6e;
+color:white;
+cursor:pointer;
+}
+
+/* corações */
+
+.heart{
+position:absolute;
+font-size:20px;
+animation:subir 6s linear forwards;
+}
+
+@keyframes subir{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-600px);opacity:0;}
+}
+
+/* mensagem final */
+
+.mensagem-final{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+
+font-size:40px;
+
+background:rgba(255,105,180,0.4);
+
+padding:30px 50px;
+
+border-radius:20px;
+
+opacity:0;
+transition:1.5s;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="telaInicial" class="tela-inicial">
+<h2>Eu fiz uma coisa pra você...</h2>
+<button id="botaoAbrir" class="botao-abrir">Clique aqui</button>
+</div>
+
+<div class="titulo-romantico">
+🦋 Para a garota que eu mais amei e amo. Tayná. 🦋
+</div>
+
+<div class="container">
+
+<h1>10 coisas que eu odeio em você</h1>
+
+<div id="lista"></div>
+
+<button id="botaoRevelar">Revelar próxima</button>
+
+</div>
+
+<div id="mensagemFinal" class="mensagem-final">
+eu ainda te amo 💗
+</div>
+
+<script>
+
+/* abrir site */
+
+document.getElementById("botaoAbrir").addEventListener("click",function(){
+
+document.getElementById("telaInicial").style.display="none";
+
+let musica = document.getElementById("musica");
+musica.volume = 0.5;
+musica.play();
+
+});
+
+/* lista */
+
+let frases=[
+"1. Odeio quando você fica me observando.",
+"2. Odeio quando me faz rir.",
+"3. Odeio quando se atrasa e faz chantagem pra eu não me irritar.",
+"4. Odeio quando faz carinho na minha orelha.",
+"5. Odeio como você é carinhosa e atenciosa, de um jeito tão fofo e lindo que me dá até enjoo.",
+"6. Odeio quando você faz biquinho e finge estar emburrada.",
+"7. Odeio quando não está por perto.",
+"8. Odeio quando você se força a agir diferente.",
+"9. Odeio o fato de você me conhecer melhor que qualquer pessoa."
+];
+
+let final="10. Mas além de tudo isso, o que eu mais odeio é não te odiar nem um pouco, nem por uma fração de segundos… ❤️";
+
+let i=0;
+
+/* revelar */
+
+document.getElementById("botaoRevelar").addEventListener("click",function(){
+
+criarCoracao();
+
+if(i<frases.length){
+
+document.getElementById("lista").innerHTML+="<p>"+frases[i]+"</p>";
+
+i++;
+
+}
+
+else if(i===frases.length){
+
+document.getElementById("lista").innerHTML+="<p><strong>"+final+"</strong></p>";
+
+i++;
+
+let botao=document.getElementById("botaoRevelar");
+
+botao.disabled=true;
+
+botao.innerText="💗";
+
+setTimeout(()=>{
+
+document.getElementById("mensagemFinal").style.opacity="1";
+
+},1500);
+
+}
+
+});
+
+/* corações */
+
+function criarCoracao(){
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*window.innerWidth+"px";
+
+heart.style.top=window.innerHeight+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+
+heart.remove();
+
+},6000);
+
+}
+
+</script>
+
+</body>
+</html>
